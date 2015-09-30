@@ -12,7 +12,7 @@
 #if defined _MSC_VER
 #define HP_BREAK __debugbreak();
 #elif defined __GNUC__
-	__asm__ ("int $3");
+#define HP_BREAK __asm__ ("int $3");
 #else
 #error Unsupported compiler
 #endif
