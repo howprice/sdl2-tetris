@@ -115,5 +115,6 @@ void Renderer::DrawText( const char* text, int x, int y, uint32_t rgba /*= 0xfff
 	SDL_QueryTexture(pTexture, NULL, NULL, &width, &height);
 	SDL_Rect dstRect = { x, y, width, height };
 	SDL_RenderCopy( m_pSdlRenderer, pTexture, nullptr, &dstRect );
+	SDL_DestroyTexture( pTexture );
 	SDL_FreeSurface( pSurface );
 }

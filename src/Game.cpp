@@ -366,7 +366,7 @@ void Game::AddTetronimoToField( const Field& field, const TetrominoInstance& tet
 		const int y = tetronimoInstance.m_pos.y + blockCoords[i].y;
 
 		// Count going outside the field as an overlap
-		HP_ASSERT( x >= 0 && x < (int)field.width && y >= 0 || y >= (int)field.height )
+		HP_ASSERT( (x >= 0) && (x < (int)field.width) && (y >= 0) && (y < (int)field.height) )
 
 			field.staticBlocks[x + y * field.width] = (unsigned int)tetronimoInstance.m_tetrominoType;
 	}
@@ -463,7 +463,7 @@ void Game::Draw( Renderer& renderer )
 #ifdef _DEBUG
 	float fps = 1.0f / m_deltaTimeSeconds;
 	char text[128];
-	sprintf_s( text, "FPS: %.1f", fps );
+	snprintf( text, sizeof(text), "FPS: %.1f", fps );
 	renderer.DrawText( text, 0, 0, 0x8080ffff );
 #endif
 }
@@ -523,17 +523,17 @@ void Game::DrawPlaying( Renderer& renderer )
 	}
 
 	char text[128];
-	sprintf_s( text, "Lines: %u", m_numLinesCleared );
+	snprintf( text, sizeof(text), "Lines: %u", m_numLinesCleared );
 	renderer.DrawText( text, 0, 100, 0xffffffff );
-	sprintf_s( text, "Level: %u", m_level );
+	snprintf( text, sizeof(text), "Level: %u", m_level );
 	renderer.DrawText( text, 0, 140, 0xffffffff );
-	sprintf_s( text, "Score: %u", m_score );
+	snprintf( text, sizeof(text), "Score: %u", m_score );
 	renderer.DrawText( text, 0, 180, 0xffffffff );
-	sprintf_s( text, "High score: %u", m_hiScore );
+	snprintf( text, sizeof(text), "High score: %u", m_hiScore );
 	renderer.DrawText( text, 0, 220, 0xffffffff );
 
 #ifdef _DEBUG
-	sprintf_s( text, "Frames per fall: %u", m_framesPerFallStep );
+	snprintf( text, sizeof(text), "Frames per fall: %u", m_framesPerFallStep );
 	renderer.DrawText( text, 0, 400, 0x404040ff );
 #endif
 }
