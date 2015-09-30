@@ -29,16 +29,18 @@ This project uses [GENie](https://github.com/bkaradzic/genie) to generate the bu
 
 ###Linux
 
-	$ git clone https://github.com/howprice/hello-sdl2
+	$ git clone https://github.com/howprice/sdl2-tetris
 	$ tools/bin/linux/genie gmake
 	$ cd build
 	$ make
+
+n.b. You may need to chmod+x genie executable - I haven't figured out how to make the checked in file executable.
 
 `make` with no confic specified defaults to the debug config for native architecture (usually 64-bit). Can call `make config=<xxx>` where `xxx` can be `debug`, `release`, `debug32`, `release32`, `debug64` or `release64`. 
 	
 ###Windows
 
-	$ git clone https://github.com/howprice/hello-sdl2
+	$ git clone https://github.com/howprice/sdl2-tetris
 	$ tools\bin\windows\genie.exe vs2015   -- You can also use vs2013 etc.
 	
 Open build/hello-sdl2.sln with Visual Studio 2015. 
