@@ -8,14 +8,15 @@ Simple clone of Tetris in C/C++ using SDL2, for educational purposes.
 
 ##Dependencies
 
-This project depends on [SDL2](https://www.libsdl.org)
+This project depends on [SDL2](https://www.libsdl.org) and [SDL_ttf 2.0](https://www.libsdl.org/projects/SDL_ttf)
 
 ## Linux
 
 Install using your package manager, e.g.
 
-	$ apt-get install libsdl2-dev
-
+	$ sudo apt-get install libsdl2-dev
+	$ sudo apt-get install libsdl2-ttf-dev
+	
 or [download](https://www.libsdl.org/download-2.0.php) and install from source
 
 ## Windows
