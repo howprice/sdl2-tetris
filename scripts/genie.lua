@@ -16,8 +16,9 @@ solution "sdl2-tetris"
 		language "C++"
 		files { "../src/**.h", "../src/**.cpp" }
 		flags { "ExtraWarnings", "FatalWarnings" }
-		links { "SDL2" }
+		links { "SDL2", "SDL2_ttf" }
 		targetdir "../bin"
+		debugdir "../data"		-- debugger working directory
 		
 		configuration "Debug"
 			defines { "_DEBUG" }
@@ -29,18 +30,29 @@ solution "sdl2-tetris"
 
 		configuration "windows"
 			includedirs { "../3rdparty/SDL2-2.0.3/include" }
+			includedirs { "../3rdparty/SDL2_ttf-2.0.12/include" }
 			links { "SDL2main" }
 			
 			-- There is a single SDLmain.lib that is built against the Multi-threaded DLL (/MD) i.e. there is no debug lib built against Multi-threaded Debug DLL (/MD
 			flags { "ReleaseRuntime" }  
 			
+			-- Disable compiler warnings. These end up in the Project Settings -> C/C++ -> Command Line -> Additional Options, rather than C/C++ -> Advanced -> Disable Specific Warnings 
+			buildoptions { "/wd4127" } -- conditional expression is constant
+			buildoptions { "/wd4505" } -- unreferenced local function has been removed
+			
 		configuration { "windows", "not x64" }
 			libdirs { "../3rdparty/SDL2-2.0.3/lib/x86" }
-			postbuildcommands { "copy ..\\3rdparty\\SDL2-2.0.3\\lib\\x86\\SDL2.dll ..\\bin\\SDL2.dll" }
+			libdirs { "../3rdparty/SDL2_ttf-2.0.12/lib/x86" }
+			postbuildcommands { 
+				"copy ..\\3rdparty\\SDL2-2.0.3\\lib\\x86\\*.dll ..\\bin",
+				"copy ..\\3rdparty\\SDL2_ttf-2.0.12\\lib\\x86\\*.dll ..\\bin" }
 
 		configuration { "windows", "x64" }		
 			libdirs { "../3rdparty/SDL2-2.0.3/lib/x64" }
-			postbuildcommands { "copy ..\\3rdparty\\SDL2-2.0.3\\lib\\x64\\SDL2.dll ..\\bin\\SDL2.dll" }
+			libdirs { "../3rdparty/SDL2_ttf-2.0.12/lib/x64" }
+			postbuildcommands { 
+				"copy ..\\3rdparty\\SDL2-2.0.3\\lib\\x64\\*.dll ..\\bin", 
+				"copy ..\\3rdparty\\SDL2_ttf-2.0.12\\lib\\x64\\*.dll ..\\bin" }
 
 		configuration "linux"
 			
