@@ -14,8 +14,9 @@ This project depends on [SDL2](https://www.libsdl.org) and [SDL_ttf 2.0](https:/
 
 Install using your package manager, e.g.
 
-	$ apt-get install libsdl2-dev
-
+	$ sudo apt-get install libsdl2-dev
+	$ sudo apt-get install libsdl2-ttf-dev
+	
 or [download](https://www.libsdl.org/download-2.0.php) and install from source
 
 ## Windows
