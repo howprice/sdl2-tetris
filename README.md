@@ -1,17 +1,22 @@
-# hello-sdl2
+# sdl2-tetris
 
 ---
 
 ## About
 
-Test repository to investigate integrating an external library (SDL2) with a GitHub repository
+Simple clone of Tetris in C/C++ using SDL2, for educational purposes.
 
 ##Dependencies
 
 This project depends on [SDL2](https://www.libsdl.org)
 
 ## Linux
+
+Install using your package manager, e.g.
+
 	$ apt-get install libsdl2-dev
+
+or [download](https://www.libsdl.org/download-2.0.php) and install from source
 
 ## Windows
 
