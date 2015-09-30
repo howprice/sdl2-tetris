@@ -53,3 +53,7 @@ The [SDL2 Development libraries for Visual C++](https://www.libsdl.org/download-
 ###Windows
 
 	$ tools/bin/windows/genie clean
+
+## Thanks
+
+Classic Console font from http://webdraft.hu/fonts/classic-console
