@@ -10,6 +10,10 @@ Simple clone of Tetris in C/C++ using SDL2, for educational purposes.
 
 This project depends on [SDL2](https://www.libsdl.org) and [SDL_ttf 2.0](https://www.libsdl.org/projects/SDL_ttf)
 
+## Windows
+
+The [SDL2 Development libraries for Visual C++](https://www.libsdl.org/download-2.0.php) with Visual Studio 2015 versions of SDLmain.lib are checked in to the `3rdparty` folder for convenience.
+
 ## Linux
 
 Install using your package manager, e.g.
@@ -19,9 +23,9 @@ Install using your package manager, e.g.
 	
 or [download](https://www.libsdl.org/download-2.0.php) and install from source
 
-## Windows
+### Raspberry Pi
 
-The [SDL2 Development libraries for Visual C++](https://www.libsdl.org/download-2.0.php) with Visual Studio 2015 versions of SDLmain.lib are checked in to the `3rdparty` folder for convenience.
+libsdl2-dev is available to install in Raspbian Jessie. On Wheezy and earlier you'll have to install from source.
 
 ## Building
 
@@ -30,6 +34,7 @@ This project uses [GENie](https://github.com/bkaradzic/genie) to generate the bu
 ###Linux
 
 	$ git clone https://github.com/howprice/sdl2-tetris
+	$ cd sdl2-tetris
 	$ tools/bin/linux/genie gmake
 	$ cd build
 	$ make
