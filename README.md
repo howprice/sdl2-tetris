@@ -25,7 +25,7 @@ or [download](https://www.libsdl.org/download-2.0.php) and install from source
 
 ### Raspberry Pi
 
-libsdl2-dev is available to install in Raspbian Jessie. On Wheezy and earlier you'll have to install from source.
+The SDL2 packages (libsdl2-dev, libsdl2-ttf-dev) are available to install in Raspbian Jessie. On Wheezy and earlier you'll have to install from source.
 
 ## Building
 
@@ -43,6 +43,10 @@ n.b. You may need to chmod+x genie executable - I haven't figured out how to mak
 
 `make` with no confic specified defaults to the debug config for native architecture (usually 64-bit). Can call `make config=<xxx>` where `xxx` can be `debug`, `release`, `debug32`, `release32`, `debug64` or `release64`. 
 	
+### Raspberry Pi
+
+Use `tools/bin/raspberry-pi/genie`
+	
 ###Windows
 
 	$ git clone https://github.com/howprice/sdl2-tetris
@@ -57,10 +61,25 @@ The [SDL2 Development libraries for Visual C++](https://www.libsdl.org/download-
 ###Linux
 
 	$ tools/bin/linux/genie clean
+	
+###Raspberry Pi
+
+	$ tools/bin/raspberry-pi/genie clean
 
 ###Windows
 
 	$ tools/bin/windows/genie clean
+
+## Running
+
+### Windows
+
+Genie is configured to generate `sdl2-tetris.vcxproj.user` which correctly sets the debugger working directory to `data/`
+
+### Linux
+
+	$ cd data
+	$ ../build/sdl2-tetris
 
 ## Thanks
 
