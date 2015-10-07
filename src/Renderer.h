@@ -34,12 +34,12 @@ public:
 
 private:
 
-	unsigned int	m_logicalWidth = 0;
-	unsigned int	m_logicalHeight = 0;
+	unsigned int	m_logicalWidth;
+	unsigned int	m_logicalHeight;
 
-	SDL_Renderer*	m_pSdlRenderer = nullptr;
+	SDL_Renderer*	m_pSdlRenderer;
 
-	TTF_Font*		m_pFont = nullptr;
+	TTF_Font*		m_pFont;
 };
 
 #endif // RENDERER_H

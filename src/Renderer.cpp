@@ -28,6 +28,10 @@ static SDL_Color MakeSDL_Colour( uint32_t rgba )
 //--------------------------------------------------------------------------------------------------
 
 Renderer::Renderer( SDL_Window& window, unsigned int logicalWidth, unsigned int logicalHeight )
+  : m_logicalWidth(0)
+  , m_logicalHeight(0)
+  , m_pSdlRenderer(nullptr)
+  , m_pFont(nullptr)
 {
 	Uint32 rendererFlags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
 	m_pSdlRenderer = SDL_CreateRenderer( &window, -1, rendererFlags );

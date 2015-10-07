@@ -30,6 +30,14 @@ static bool operator==( SDL_version& a, SDL_version& b )
 
 //--------------------------------------------------------------------------------------------------
 
+App::App()
+  : m_pWindow(nullptr)
+  , m_pRenderer(nullptr)
+  , m_pGame(nullptr)
+{
+
+}
+
 bool App::Init( bool bFullScreen, unsigned int displayWidth, unsigned int displayHeight )
 {
 	if( SDL_Init( SDL_INIT_EVERYTHING ) != 0)

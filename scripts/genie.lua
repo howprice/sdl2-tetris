@@ -56,10 +56,11 @@ solution "sdl2-tetris"
 
 		configuration "linux"
 			
-			buildoptions { "-std=c++11" }
+			buildoptions { "-std=c++0x" }
 			buildoptions { "-Wno-switch" }
 			buildoptions { "-Wno-unused-function" }
 			buildoptions { "-Wno-missing-field-initializers" }
+			buildoptions { "-Wno-missing-braces" }
 			
 --			buildoptions { "`sdl2-config --cflags`" }  -- magic quotes are shell-dependent
 			buildoptions { os.outputof("sdl2-config --cflags") }  -- requires GENie to be run on target machine
