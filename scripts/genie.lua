@@ -68,6 +68,10 @@ solution "sdl2-tetris"
 --			linkoptions { "`sdl2-config --libs`" } -- magic quotes are shell-dependent
 			linkoptions { os.outputof("sdl2-config --libs") } -- requires GENie to be run on target machine
 
+			libdirs { "/opt/vc/lib" } -- really just Raspberry Pi only (VideoCore) 
+			links { "EGL", "GLESv2" }
+
+
 if _ACTION == "clean" then
 	os.rmdir("../bin")
 	os.rmdir("../build/.vs")		-- this doesn't seem to work because the file is write protected

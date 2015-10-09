@@ -460,12 +460,12 @@ void Game::Draw( Renderer& renderer )
 		break;
 	}
 
-#ifdef _DEBUG
+	//#ifdef _DEBUG
 	float fps = 1.0f / m_deltaTimeSeconds;
 	char text[128];
 	snprintf( text, sizeof(text), "FPS: %.1f", fps );
 	renderer.DrawText( text, 0, 0, 0x8080ffff );
-#endif
+	//#endif
 }
 
 void Game::DrawPlaying( Renderer& renderer )
