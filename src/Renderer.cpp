@@ -25,6 +25,17 @@ static SDL_Color MakeSDL_Colour( uint32_t rgba )
 	return color;
 }
 
+static void PrintRendererInfo(SDL_RendererInfo& rendererInfo)
+{
+	printf( "Renderer: %s software=%d accelerated=%d, presentvsync=%d targettexture=%d\n", 
+			rendererInfo.name,
+			(rendererInfo.flags & SDL_RENDERER_SOFTWARE) != 0, 
+			(rendererInfo.flags & SDL_RENDERER_ACCELERATED) != 0, 
+			(rendererInfo.flags & SDL_RENDERER_PRESENTVSYNC) != 0, 
+			(rendererInfo.flags & SDL_RENDERER_TARGETTEXTURE) != 0 );
+}
+
+
 //--------------------------------------------------------------------------------------------------
 
 Renderer::Renderer( SDL_Window& window, unsigned int logicalWidth, unsigned int logicalHeight )
@@ -33,6 +44,16 @@ Renderer::Renderer( SDL_Window& window, unsigned int logicalWidth, unsigned int 
   , m_pSdlRenderer(nullptr)
   , m_pFont(nullptr)
 {
+	int numRenderDrivers = SDL_GetNumRenderDrivers();
+	printf( "%d render drivers:\n", numRenderDrivers );
+	for( int i = 0; i < numRenderDrivers; ++i )
+	{
+		SDL_RendererInfo rendererInfo;
+		SDL_GetRenderDriverInfo(i, &rendererInfo);
+		printf( "%d ", i );
+		PrintRendererInfo(rendererInfo);
+	}
+
 	Uint32 rendererFlags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
 	m_pSdlRenderer = SDL_CreateRenderer( &window, -1, rendererFlags );
 	if(!m_pSdlRenderer)
@@ -40,6 +61,15 @@ Renderer::Renderer( SDL_Window& window, unsigned int logicalWidth, unsigned int 
 		fprintf( stderr, "SDL_CreateRenderer failed: %s\n", SDL_GetError() );
 		HP_FATAL_ERROR( "Failed to create SDL renderer" );
 	}
+
+	SDL_RendererInfo rendererInfo;
+	if( SDL_GetRendererInfo(m_pSdlRenderer, &rendererInfo) != 0 )
+	{
+		fprintf( stderr, "SDL_GetRendererInfo failed: %s\n", SDL_GetError() );
+		HP_FATAL_ERROR( "SDL_GetRendererInfo failed" );
+	}
+	printf( "Created renderer:\n" );
+	PrintRendererInfo(rendererInfo);
 
 	// n.b. The display size may not equal the logical size
  	int displayWidth, displayHeight;

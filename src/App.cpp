@@ -13,6 +13,8 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 
+#include <GLES2/gl2.h>
+
 #include <stdio.h>
 #include <chrono>
 
@@ -26,6 +28,28 @@ static void print_SDL_version( const char* preamble, const SDL_version& v )
 static bool operator==( SDL_version& a, SDL_version& b )
 {
 	return (a.major == b.major) && (a.minor == b.minor) && (a.patch == b.patch);
+}
+
+static void SetGLAttribute(SDL_GLattr attr, int value)
+{
+	if( SDL_GL_SetAttribute(attr, value) != 0 )
+	{
+		fprintf( stderr, "SDL_GL_SetAttr failed: %s\n", SDL_GetError() );
+		HP_FATAL_ERROR( "SDL_GL_SetAttr failed" );
+	}
+}
+
+static void PrintGLString(GLenum name)
+{
+	const GLubyte* ret = glGetString(name);
+	if( ret == 0 )
+	{
+		fprintf( stderr, "Failed to get GL string: %d\n", name );
+	}
+	else
+	{
+		printf( "%s\n", ret );
+	}
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -56,6 +80,52 @@ bool App::Init( bool bFullScreen, unsigned int displayWidth, unsigned int displa
 	print_SDL_version( "Linking against SDL version", linkedVersion );
 	SDL_assert_release( (compiledVersion == linkedVersion) );
 
+	int numDisplays = SDL_GetNumVideoDisplays();
+	printf( "%d video displays\n", numDisplays );
+	for( int i = 0; i < numDisplays; ++i )
+	{
+		SDL_DisplayMode displayMode;
+		if( SDL_GetCurrentDisplayMode(i, &displayMode) != 0 )
+		{
+			fprintf( stderr, "Failed to get display mode for video display %d: %s", i, SDL_GetError() );
+			continue;
+		}
+
+		printf( "Display %d: w=%d, h=%d refresh_rate=%d\n", i, displayMode.w, displayMode.h, displayMode.refresh_rate );
+   	}
+
+	SetGLAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+	SetGLAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+	SetGLAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+
+	const char* title = "SDL Window";
+	if( bFullScreen )
+	{
+	  HP_FATAL_ERROR("Just checking");
+		m_pWindow = SDL_CreateWindow( title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 0, 0, SDL_WINDOW_FULLSCREEN_DESKTOP );
+	}
+	else
+	{
+	  m_pWindow = SDL_CreateWindow( title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, displayWidth, displayHeight, SDL_WINDOW_SHOWN /*| SDL_WINDOW_OPENGL*/ );
+	}
+
+	if( !m_pWindow )
+	{
+		printf( "Failed to create SDL window: %s\n", SDL_GetError() );
+		return false;
+	}
+
+	SDL_GLContext gl_context = SDL_GL_CreateContext(m_pWindow);
+	printf("GL_VERSION: "); 
+	PrintGLString(GL_VERSION);
+	printf("GL_RENDERER: ");
+	PrintGLString(GL_RENDERER);
+	printf("GL_SHADING_LANGUAGE_VERSION: ");
+	PrintGLString(GL_SHADING_LANGUAGE_VERSION);
+	printf("GL_EXTENSIONS: ");
+	PrintGLString(GL_EXTENSIONS);
+	SDL_GL_DeleteContext(gl_context);
+
 	// SDL2_ttf
 
 	if( TTF_Init() == -1 )
@@ -70,22 +140,6 @@ bool App::Init( bool bFullScreen, unsigned int displayWidth, unsigned int displa
 	const SDL_version *pLinkedVersion = TTF_Linked_Version();
 	print_SDL_version( "Compiled against SDL_ttf version", compiledVersion );
 	print_SDL_version( "Linking against SDL_ttf version", *pLinkedVersion );
-
-	const char* title = "SDL Window";
-	if( bFullScreen )
-	{
-		m_pWindow = SDL_CreateWindow( title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 0, 0, SDL_WINDOW_FULLSCREEN_DESKTOP );
-	}
-	else
-	{
-		m_pWindow = SDL_CreateWindow( title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, displayWidth, displayHeight, SDL_WINDOW_SHOWN );
-	}
-
-	if( !m_pWindow )
-	{
-		printf( "Failed to create SDL window: %s\n", SDL_GetError() );
-		return false;
-	}
 
 	unsigned int logicalWidth = 1280;
 	unsigned int logicalHeight = 720;
