@@ -13,7 +13,9 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 
+#ifdef __VCCOREVER__	// Raspberry Pi
 #include <GLES2/gl2.h>
+#endif
 
 #include <stdio.h>
 #include <chrono>
@@ -29,6 +31,8 @@ static bool operator==( SDL_version& a, SDL_version& b )
 {
 	return (a.major == b.major) && (a.minor == b.minor) && (a.patch == b.patch);
 }
+
+#ifdef GL_ES_VERSION_2_0
 
 static void SetGLAttribute(SDL_GLattr attr, int value)
 {
@@ -51,6 +55,8 @@ static void PrintGLString(GLenum name)
 		printf( "%s\n", ret );
 	}
 }
+
+#endif // GL_ES_VERSION_2_0
 
 //--------------------------------------------------------------------------------------------------
 
@@ -94,9 +100,11 @@ bool App::Init( bool bFullScreen, unsigned int displayWidth, unsigned int displa
 		printf( "Display %d: w=%d, h=%d refresh_rate=%d\n", i, displayMode.w, displayMode.h, displayMode.refresh_rate );
    	}
 
+#ifdef GL_ES_VERSION_2_0
 	SetGLAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
 	SetGLAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 	SetGLAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+#endif
 
 	const char* title = "SDL Window";
 	if( bFullScreen )
@@ -115,6 +123,8 @@ bool App::Init( bool bFullScreen, unsigned int displayWidth, unsigned int displa
 		return false;
 	}
 
+#ifdef GL_ES_VERSION_2_0
+	// Let's see if we can use OpenGL ES 2 on Raspberry Pi
 	SDL_GLContext gl_context = SDL_GL_CreateContext(m_pWindow);
 	printf("GL_VERSION: "); 
 	PrintGLString(GL_VERSION);
@@ -125,6 +135,7 @@ bool App::Init( bool bFullScreen, unsigned int displayWidth, unsigned int displa
 	printf("GL_EXTENSIONS: ");
 	PrintGLString(GL_EXTENSIONS);
 	SDL_GL_DeleteContext(gl_context);
+#endif
 
 	// SDL2_ttf
 
