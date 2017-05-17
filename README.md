@@ -31,7 +31,7 @@ The SDL2 packages (libsdl2-dev, libsdl2-ttf-dev) are available to install in Ras
 
 This project uses [GENie](https://github.com/bkaradzic/genie) to generate the build files for the target platform.
 
-###Linux
+### Linux
 
 	$ git clone https://github.com/howprice/sdl2-tetris
 	$ cd sdl2-tetris
@@ -47,7 +47,7 @@ n.b. You may need to chmod+x genie executable - I haven't figured out how to mak
 
 Use `tools/bin/raspberry-pi/genie`
 	
-###Windows
+### Windows
 
 	$ git clone https://github.com/howprice/sdl2-tetris
 	$ tools\bin\windows\genie.exe vs2015   -- You can also use vs2013 etc.
@@ -58,15 +58,15 @@ The [SDL2 Development libraries for Visual C++](https://www.libsdl.org/download-
 
 ## Cleaning the build files
 
-###Linux
+### Linux
 
 	$ tools/bin/linux/genie clean
 	
-###Raspberry Pi
+### Raspberry Pi
 
 	$ tools/bin/raspberry-pi/genie clean
 
-###Windows
+### Windows
 
 	$ tools/bin/windows/genie clean
 
