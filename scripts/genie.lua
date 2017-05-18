@@ -82,7 +82,7 @@ newaction
 if _ACTION == "clean" then
 	os.rmdir("../bin")
 	if os.get() == "windows" then
-		os.outputof("rmdir ..\\build\\.vs /s /q")
+		os.outputof("rmdir ..\\build\\.vs /s /q") -- remove the hidden .vs directory
 	end
 	os.rmdir("../build")			-- this doesn't work because the directory contains .vs folder
 end
