@@ -1,10 +1,3 @@
---[[ 
-
-TODO:
-	
-	* clean action should remove the build directory even if it is not empty
---]] 
-
 solution "sdl2-tetris"
 	location "../build"
 	configurations { "Debug", "Release" }
@@ -18,7 +11,7 @@ solution "sdl2-tetris"
 		flags { "ExtraWarnings", "FatalWarnings" }
 		links { "SDL2", "SDL2_ttf" }
 		targetdir "../bin"
-		debugdir "../data"		-- debugger working directory
+		debugdir "../data"		-- debugger working directory. Not implemented for Xcode so use must set manually.
 		
 		configuration "Debug"
 			defines { "_DEBUG" }
@@ -27,6 +20,9 @@ solution "sdl2-tetris"
 		configuration "Release"
 			defines { "NDEBUG" }
 			flags { "Optimize" }
+
+		configuration "not macosx"
+			links { "SDL2" }
 
 		configuration "windows"
 			includedirs { "../3rdparty/SDL2-2.0.3/include" }
@@ -72,6 +68,15 @@ end
 			libdirs { "/opt/vc/lib" } -- really just Raspberry Pi only (VideoCore) 
 			links { "EGL", "GLESv2" }
 
+		configuration "macosx"
+			buildoptions { "-std=c++11" }
+if os.get() == "macosx" then
+			buildoptions { os.outputof("sdl2-config --cflags") }
+			linkoptions { os.outputof("sdl2-config --libs") }
+end
+			buildoptions { "-Wno-unused-function" }
+			buildoptions { "-Wno-missing-braces" }
+
 newaction
 {
 	trigger = "clean",
@@ -84,5 +89,9 @@ if _ACTION == "clean" then
 	if os.get() == "windows" then
 		os.outputof("rmdir ..\\build\\.vs /s /q")
 	end
-	os.rmdir("../build")			-- this doesn't work because the directory contains .vs folder
+	if os.get() == "macosx" then
+		os.outputof("rm -rf build") -- remove the build folder, including hidden .DS_Store file
+	end
+
+	os.rmdir("../build")
 end
