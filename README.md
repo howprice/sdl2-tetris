@@ -12,7 +12,7 @@ This project depends on [SDL2](https://www.libsdl.org) and [SDL_ttf 2.0](https:/
 
 ## Windows
 
-The [SDL2 Development libraries for Visual C++](https://www.libsdl.org/download-2.0.php) with Visual Studio 2015 versions of SDLmain.lib are checked in to the `3rdparty` folder for convenience.
+The [SDL2 Development libraries for Visual C++](https://www.libsdl.org/download-2.0.php) are checked in to the `3rdparty` folder for convenience.
 
 ## Linux
 
@@ -26,6 +26,10 @@ or [download](https://www.libsdl.org/download-2.0.php) and install from source
 ### Raspberry Pi
 
 The SDL2 packages (libsdl2-dev, libsdl2-ttf-dev) are available to install in Raspbian Jessie. On Wheezy and earlier you'll have to install from source.
+
+## Mac OS X
+
+Download the [SDL2 source code](https://www.libsdl.org/release/SDL2-2.0.5.tar.gz) and follow installation instructions or install with [Brew](https://brew.sh/)
 
 ## Building
 
@@ -52,9 +56,9 @@ Use `tools/bin/raspberry-pi/genie`
 	$ git clone https://github.com/howprice/sdl2-tetris
 	$ tools\bin\windows\genie.exe vs2015   -- You can also use vs2013 etc.
 	
-Open build/hello-sdl2.sln with Visual Studio 2015. 
+Open build\sdl2-tetris.sln with Visual Studio 2015. 
 
-The [SDL2 Development libraries for Visual C++](https://www.libsdl.org/download-2.0.php) are checked in to 3rdparty for convenience. I have overwritten the pre-Visual Studio 2015 SDLmain.lib files with those built for VS2015 for convenience. If you want to use 2013 or earlier then download the zip and overwrite. n.b. SDLmain.lib is built against the CRT (which was re-written for VS2015) but SDL.lib does not use the CRT. Ask Google for "SDL2 Visual Studio 2015" for more info.
+The [SDL2 Development libraries for Visual C++](https://www.libsdl.org/download-2.0.php) are checked in to 3rdparty for convenience. 
 
 ## Cleaning the build files
 
@@ -68,7 +72,11 @@ The [SDL2 Development libraries for Visual C++](https://www.libsdl.org/download-
 
 ### Windows
 
-	$ tools/bin/windows/genie clean
+	$ tools\bin\windows\genie clean
+
+### Mac OS X
+
+	$ tools/bin/macosx/genie clean
 
 ## Running
 
@@ -80,6 +88,22 @@ Genie is configured to generate `sdl2-tetris.vcxproj.user` which correctly sets 
 
 	$ cd data
 	$ ../build/sdl2-tetris
+
+### Mac OS X
+
+GENie cannot set the working directory for Xcode so you must do it manually:
+
+Xcode -> Product -> Scheme -> Edit Scheme... -> Options -> Working Directory -> Use custom working directory: $PROJECT_DIR/../data
+
+## Controls
+
+Cursor left and right | Move left and right
+Cursor down | Move down one tile
+Cursor up | Move down to bottom
+z | Rotate left
+x | Rotate right
+Esc | Quit
+
 
 ## Thanks
 
