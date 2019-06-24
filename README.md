@@ -6,7 +6,7 @@
 
 Simple clone of Tetris in C/C++ using SDL2, for educational purposes.
 
-##Dependencies
+## Dependencies
 
 This project depends on [SDL2](https://www.libsdl.org) and [SDL_ttf 2.0](https://www.libsdl.org/projects/SDL_ttf)
 
