@@ -29,7 +29,7 @@ The SDL2 packages (libsdl2-dev, libsdl2-ttf-dev) are available to install in Ras
 
 ## Mac OS X
 
-Download the [SDL2 source code](https://www.libsdl.org/release/SDL2-2.0.5.tar.gz) and follow installation instructions or install with [Brew](https://brew.sh/)
+Download the [SDL2 source code](https://www.libsdl.org/download-2.0.php) and follow installation instructions or install with [Brew](https://brew.sh/)
 
 ## Building
 
