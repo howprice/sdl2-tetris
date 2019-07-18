@@ -193,7 +193,7 @@ void App::Run()
 	bool bDone = false;
 	while( !bDone )
 	{
-		GameInput gameInput = { 0 };
+		GameInput gameInput = {};
 
 		// respond to events
 		SDL_Event event;
