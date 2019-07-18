@@ -64,7 +64,7 @@ The [SDL2 Development libraries for Visual C++](https://www.libsdl.org/download-
 
 #### Xcode
 
-    	$ ./tools/bin/macosx/genie xcode9
+	$ ./tools/bin/macosx/genie xcode9
 
 or
 
