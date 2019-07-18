@@ -60,11 +60,32 @@ Open build\sdl2-tetris.sln with Visual Studio 2015.
 
 The [SDL2 Development libraries for Visual C++](https://www.libsdl.org/download-2.0.php) are checked in to 3rdparty for convenience. 
 
+### Mac OS X
+
+#### Xcode
+
+    	$ ./tools/bin/macosx/genie xcode9
+
+or
+
+	$ ./genie_xcode9.sh
+
+Open build/sdl2-tetris.xcworkspace in Xcode and build
+
+#### GCC
+
+	$ ./genie_gmake.sh
+	$ cd build
+	$ make
+
 ## Cleaning the build files
 
 ### Linux
 
-	$ tools/bin/linux/genie clean
+	$ tools/bin/linux/genie clean	
+or
+
+	$ ./genie_clean.sh
 	
 ### Raspberry Pi
 
@@ -78,6 +99,10 @@ The [SDL2 Development libraries for Visual C++](https://www.libsdl.org/download-
 
 	$ tools/bin/macosx/genie clean
 
+or
+
+	$ ./genie_clean.sh
+	
 ## Running
 
 ### Windows
@@ -91,9 +116,15 @@ Genie is configured to generate `sdl2-tetris.vcxproj.user` which correctly sets 
 
 ### Mac OS X
 
+##### Xcode
 GENie cannot set the working directory for Xcode so you must do it manually:
 
 Xcode -> Product -> Scheme -> Edit Scheme... -> Options -> Working Directory -> Use custom working directory: $PROJECT_DIR/../data
+
+##### GCC
+
+       $ cd data
+       $ ../build/sdl2-tetris
 
 ## Controls
 

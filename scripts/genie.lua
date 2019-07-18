@@ -71,8 +71,9 @@ end
 		configuration "macosx"
 			buildoptions { "-std=c++11" }
 if os.get() == "macosx" then
-			buildoptions { os.outputof("sdl2-config --cflags") }
-			linkoptions { os.outputof("sdl2-config --libs") }
+			--buildoptions { (os.outputof("sdl2-config --cflags")) }
+			buildoptions { "`sdl2-config --cflags`" }
+			linkoptions { "`sdl2-config --libs`" }
 end
 			buildoptions { "-Wno-unused-function" }
 			buildoptions { "-Wno-missing-braces" }
