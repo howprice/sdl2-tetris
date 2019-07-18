@@ -10,11 +10,11 @@ Simple clone of Tetris in C/C++ using SDL2, for educational purposes.
 
 This project depends on [SDL2](https://www.libsdl.org) and [SDL_ttf 2.0](https://www.libsdl.org/projects/SDL_ttf)
 
-## Windows
+### Windows
 
 The [SDL2 Development libraries for Visual C++](https://www.libsdl.org/download-2.0.php) are checked in to the `3rdparty` folder for convenience.
 
-## Linux
+### Linux
 
 Install using your package manager, e.g.
 
@@ -27,7 +27,7 @@ or [download](https://www.libsdl.org/download-2.0.php) and install from source
 
 The SDL2 packages (libsdl2-dev, libsdl2-ttf-dev) are available to install in Raspbian Jessie. On Wheezy and earlier you'll have to install from source.
 
-## Mac OS X
+### Mac OS X
 
 Download the [SDL2 source code](https://www.libsdl.org/download-2.0.php) and follow installation instructions or install with [Brew](https://brew.sh/)
 
@@ -116,12 +116,12 @@ Genie is configured to generate `sdl2-tetris.vcxproj.user` which correctly sets 
 
 ### Mac OS X
 
-##### Xcode
+#### Xcode
 GENie cannot set the working directory for Xcode so you must do it manually:
 
 Xcode -> Product -> Scheme -> Edit Scheme... -> Options -> Working Directory -> Use custom working directory: $PROJECT_DIR/../data
 
-##### GCC
+#### GCC
 
        $ cd data
        $ ../build/sdl2-tetris
