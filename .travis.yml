@@ -4,7 +4,9 @@ os:
   - osx
 dist: xenial
 sudo: required
-compiler: gcc
+compiler:
+  - gcc
+  - clang
 
 branches:
  only:
