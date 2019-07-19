@@ -61,12 +61,9 @@ solution "sdl2-tetris"
 			buildoptions { "-Wno-missing-braces" }
 			
 			-- TODO: Comment on why using sdl2-config rather than magic quotes on Linux
---			buildoptions { "`sdl2-config --cflags`" }  -- magic quotes are shell-dependent
---			linkoptions { "`sdl2-config --libs`" } -- magic quotes are shell-dependent
-if os.get() == "linux" then
-			buildoptions { os.outputof("sdl2-config --cflags") }  -- requires GENie to be run on target machine
---			linkoptions { os.outputof("sdl2-config --libs") } -- requires GENie to be run on target machine
-end
+			buildoptions { "`sdl2-config --cflags`" }  -- magic quotes are shell-dependent
+			linkoptions { "`sdl2-config --libs`" } -- magic quotes are shell-dependent
+
 			libdirs { "/opt/vc/lib" } -- really just Raspberry Pi only (VideoCore) 
 			links { "EGL", "GLESv2" }
 
