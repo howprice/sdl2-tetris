@@ -70,15 +70,18 @@ end
 
 		configuration "macosx"
 			buildoptions { "-std=c++11" }
+			buildoptions { "-Wno-unused-function" }
+			buildoptions { "-Wno-missing-braces" }
+
+		configuration { "macosx", "xcode*" }
 if os.get() == "macosx" then
 			buildoptions { os.outputof("sdl2-config --cflags") }
 			linkoptions { os.outputof("sdl2-config --libs") }
 end
-			--buildoptions { "`sdl2-config --cflags`" } -- no good for Xcode
-			--linkoptions { "`sdl2-config --libs`" }
 
-			buildoptions { "-Wno-unused-function" }
-			buildoptions { "-Wno-missing-braces" }
+		configuration { "macosx", "not xcode*" }
+			buildoptions { "`sdl2-config --cflags`" } -- magic quotes are no good for Xcode
+			linkoptions { "`sdl2-config --libs`" }
 
 newaction
 {
