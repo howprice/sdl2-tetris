@@ -12,9 +12,16 @@ branches:
 
 install:
   # install any dependencies required
-  - sudo apt-get install libsdl2-dev -y
-  - sdl2-config --version
-  - sudo apt-get install libsdl2-ttf-dev -y
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then 
+        sudo apt-get install libsdl2-dev -y;
+        sdl2-config --version;
+        sudo apt-get install libsdl2-ttf-dev -y;
+    fi
+  - if [ $TRAVIS_OS_NAME == osx ]; then 
+       brew update;
+       brew install sdl2;
+       brew install sdl2_ttf;
+    fi
     
 script:
   - ./genie_gmake.sh
