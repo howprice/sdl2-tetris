@@ -1,6 +1,5 @@
-# sdl2-tetris
+sdl2-tetris
 =====
-
 [![Build Status](https://travis-ci.org/howprice/sdl2-tetris.svg?branch=master)](https://travis-ci.org/howprice/sdl2-tetris)
 
 ## About
