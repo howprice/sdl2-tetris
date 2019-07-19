@@ -1,0 +1,29 @@
+dist: xenial
+sudo: required
+language: cpp
+compiler: gcc
+
+branches:
+ only:
+   - master
+
+before_install:
+  - sudo add-apt-repository ppa:litenstein/sdl2-xenial -y # libsdl2 2.0.8 for xenial https://launchpad.net/~litenstein/+archive/ubuntu/sdl2-xenial
+  - sudo apt-get update -qq
+
+install:
+  # install any dependencies required
+  - sudo apt-get install libsdl2-dev -y
+  - sdl2-config --version
+  - sudo apt-get install libsdl2-ttf-dev -y
+    
+script:
+  - ./genie_gmake.sh
+  - cd build
+  - make config=debug
+  - make config=dev
+  - make config=release
+
+notifications:
+  email: false
+  
