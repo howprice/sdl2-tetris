@@ -9,7 +9,7 @@ solution "sdl2-tetris"
 		language "C++"
 		files { "../src/**.h", "../src/**.cpp" }
 		flags { "ExtraWarnings", "FatalWarnings" }
-		links { "SDL2_ttf" }
+		links { "SDL2_ttf" } -- not in the string returned by `sdl2-config --links`
 		targetdir "../bin"
 		debugdir "../data"		-- debugger working directory. Not implemented for Xcode so use must set manually.
 		
@@ -21,13 +21,10 @@ solution "sdl2-tetris"
 			defines { "NDEBUG" }
 			flags { "Optimize" }
 
-		configuration "not macosx"
-			links { "SDL2" }
-
 		configuration "windows"
 			includedirs { "../3rdparty/SDL2-2.0.3/include" }
 			includedirs { "../3rdparty/SDL2_ttf-2.0.12/include" }
-			links { "SDL2main" }
+			links { "SDL2", "SDL2main" }
 			
 			-- There is a single SDLmain.lib that is built against the Multi-threaded DLL (/MD) i.e. there is no debug lib built against Multi-threaded Debug DLL (/MD
 			flags { "ReleaseRuntime" }  
@@ -58,11 +55,11 @@ solution "sdl2-tetris"
 			buildoptions { "-Wno-missing-field-initializers" }
 			buildoptions { "-Wno-missing-braces" }
 			
-if os.get() == "linux" then
+			-- TODO: Comment on why using sdl2-config rather than magic quotes on Linux
 --			buildoptions { "`sdl2-config --cflags`" }  -- magic quotes are shell-dependent
-			buildoptions { os.outputof("sdl2-config --cflags") }  -- requires GENie to be run on target machine
-
 --			linkoptions { "`sdl2-config --libs`" } -- magic quotes are shell-dependent
+if os.get() == "linux" then
+			buildoptions { os.outputof("sdl2-config --cflags") }  -- requires GENie to be run on target machine
 --			linkoptions { os.outputof("sdl2-config --libs") } -- requires GENie to be run on target machine
 end
 			libdirs { "/opt/vc/lib" } -- really just Raspberry Pi only (VideoCore) 
@@ -75,7 +72,7 @@ end
 
 		configuration { "macosx", "xcode*" }
 if os.get() == "macosx" then
-			buildoptions { os.outputof("sdl2-config --cflags") }
+			buildoptions { os.outputof("sdl2-config --cflags") } -- magic quotes are no good for Xcode so can't use `sdl2-config --cflags`
 			linkoptions { os.outputof("sdl2-config --libs") }
 end
 
