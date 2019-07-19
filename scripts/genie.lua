@@ -60,7 +60,6 @@ solution "sdl2-tetris"
 			buildoptions { "-Wno-missing-field-initializers" }
 			buildoptions { "-Wno-missing-braces" }
 			
-			-- TODO: Comment on why using sdl2-config rather than magic quotes on Linux
 			buildoptions { "`sdl2-config --cflags`" }  -- magic quotes are shell-dependent
 			linkoptions { "`sdl2-config --libs`" } -- magic quotes are shell-dependent
 
