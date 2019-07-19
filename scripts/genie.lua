@@ -9,7 +9,7 @@ solution "sdl2-tetris"
 		language "C++"
 		files { "../src/**.h", "../src/**.cpp" }
 		flags { "ExtraWarnings", "FatalWarnings" }
-		links { "SDL2", "SDL2_ttf" }
+		links { "SDL2_ttf" }
 		targetdir "../bin"
 		debugdir "../data"		-- debugger working directory. Not implemented for Xcode so use must set manually.
 		
@@ -71,10 +71,12 @@ end
 		configuration "macosx"
 			buildoptions { "-std=c++11" }
 if os.get() == "macosx" then
-			--buildoptions { (os.outputof("sdl2-config --cflags")) }
-			buildoptions { "`sdl2-config --cflags`" }
-			linkoptions { "`sdl2-config --libs`" }
+			buildoptions { os.outputof("sdl2-config --cflags") }
+			linkoptions { os.outputof("sdl2-config --libs") }
 end
+			--buildoptions { "`sdl2-config --cflags`" } -- no good for Xcode
+			--linkoptions { "`sdl2-config --libs`" }
+
 			buildoptions { "-Wno-unused-function" }
 			buildoptions { "-Wno-missing-braces" }
 
