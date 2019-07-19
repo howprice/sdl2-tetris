@@ -1,6 +1,6 @@
 solution "sdl2-tetris"
 	location "../build"
-	configurations { "Debug", "Release" }
+	configurations { "Debug", "Dev", "Release" }
 	platforms { "native", "x32", "x64" }
 
 	project "sdl2-tetris"
@@ -10,24 +10,29 @@ solution "sdl2-tetris"
 		files { "../src/**.h", "../src/**.cpp" }
 		flags { "ExtraWarnings", "FatalWarnings" }
 		links { "SDL2_ttf" } -- not in the string returned by `sdl2-config --links`
-		targetdir "../bin"
 		debugdir "../data"		-- debugger working directory. Not implemented for Xcode so use must set manually.
 		
 		configuration "Debug"
-			defines { "_DEBUG" }
+			defines { "DEBUG" }
 			flags { "Symbols" }
+			targetdir "../bin/debug"
+		
+		configuration "Dev"
+			flags { "Optimize", "Symbols" }			
+			targetdir "../bin/dev"
 
 		configuration "Release"
-			defines { "NDEBUG" }
+			defines { "NDEBUG", "RELEASE" }
 			flags { "Optimize" }
+			targetdir "../bin/release"
 
 		configuration "windows"
+			-- There is a single SDLmain.lib that is built against the Multi-threaded DLL (/MD) i.e. there is no debug lib built against Multi-threaded Debug DLL (/MD
+			flags { "ReleaseRuntime" } 
+			
 			includedirs { "../3rdparty/SDL2-2.0.3/include" }
 			includedirs { "../3rdparty/SDL2_ttf-2.0.12/include" }
 			links { "SDL2", "SDL2main" }
-			
-			-- There is a single SDLmain.lib that is built against the Multi-threaded DLL (/MD) i.e. there is no debug lib built against Multi-threaded Debug DLL (/MD
-			flags { "ReleaseRuntime" }  
 			
 			-- Disable compiler warnings. These end up in the Project Settings -> C/C++ -> Command Line -> Additional Options, rather than C/C++ -> Advanced -> Disable Specific Warnings 
 			buildoptions { "/wd4127" } -- conditional expression is constant
