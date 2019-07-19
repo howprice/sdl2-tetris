@@ -1,6 +1,9 @@
+language: cpp
+os:
+  - linux
+  - osx
 dist: xenial
 sudo: required
-language: cpp
 compiler: gcc
 
 branches:
