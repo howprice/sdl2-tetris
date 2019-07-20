@@ -13,6 +13,8 @@ script:
   - ./genie_vs2017.bat
   - cd build
   - MSBuild.exe //p:Configuration=Debug sdl2-tetris.vcxproj ## n.b. have to use double slash in Git Bash
+  - MSBuild.exe //p:Configuration=Dev sdl2-tetris.vcxproj ## n.b. have to use double slash in Git Bash
+  - MSBuild.exe //p:Configuration=Release sdl2-tetris.vcxproj ## n.b. have to use double slash in Git Bash
 
 notifications:
   email: false
