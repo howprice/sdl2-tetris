@@ -12,7 +12,7 @@ script:
   - export PATH=$MSBUILD_PATH:$PATH
   - ./genie_vs2017.bat
   - cd build
-  - MSBuild.exe sdl2-tetris.vcxproj
+  - MSBuild.exe //p:Configuration=Debug sdl2-tetris.vcxproj ## n.b. have to use double slash in Git Bash
 
 notifications:
   email: false
