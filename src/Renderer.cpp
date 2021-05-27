@@ -55,7 +55,8 @@ Renderer::Renderer( SDL_Window& window, unsigned int logicalWidth, unsigned int 
 	}
 
 	Uint32 rendererFlags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
-	m_pSdlRenderer = SDL_CreateRenderer( &window, -1, rendererFlags );
+	int rendererIndex = -1;
+	m_pSdlRenderer = SDL_CreateRenderer( &window, rendererIndex, rendererFlags );
 	if(!m_pSdlRenderer)
 	{
 		fprintf( stderr, "SDL_CreateRenderer failed: %s\n", SDL_GetError() );
