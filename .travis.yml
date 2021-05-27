@@ -1,0 +1,52 @@
+language: cpp
+dist: xenial
+sudo: required
+branches:
+  only:
+    - master
+
+# Use matrix expansion for linux/osx
+os:
+  - linux
+  - osx
+compiler:
+  - gcc
+  - clang
+
+install:
+  # install any dependencies required
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then 
+        sudo apt-get install libsdl2-dev -y;
+        sdl2-config --version;
+        sudo apt-get install libsdl2-ttf-dev -y;
+    fi
+  - if [ $TRAVIS_OS_NAME == osx ]; then 
+       brew update;
+       brew install sdl2;
+       brew install sdl2_ttf;
+    fi
+    
+script:
+  - ./genie_gmake.sh
+  - cd build
+  - make config=debug
+  - make config=dev
+  - make config=release
+
+# Explicitly include Windows job
+matrix:
+  include:
+    - os: windows
+      env:
+        - MSBUILD_PATH="/C/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools/MSBuild/15.0/Bin"
+      script:
+        - export PATH=$MSBUILD_PATH:$PATH
+        - ./genie_vs2017.bat
+        - cd build
+        - MSBuild.exe //p:Configuration=Debug sdl2-tetris.vcxproj ## n.b. have to use double slash in Git Bash
+        - MSBuild.exe //p:Configuration=Dev sdl2-tetris.vcxproj ## n.b. have to use double slash in Git Bash
+        - MSBuild.exe //p:Configuration=Release sdl2-tetris.vcxproj ## n.b. have to use double slash in Git Bash
+
+notifications:
+  email: false
+  

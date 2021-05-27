@@ -7,7 +7,7 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include <SDL_ttf.h>
+#include "SDL_ttf.h"
 
 class Texture;
 

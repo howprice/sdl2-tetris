@@ -33,6 +33,7 @@ struct Tetromino
 	static const unsigned int kNumBlocks = 4;
 	static const unsigned int kNumRotations = 4;
 	typedef uint2 BlockCoords[kNumBlocks];
+    
 	BlockCoords blockCoord[kNumRotations];
 	unsigned int rgba;
 };
