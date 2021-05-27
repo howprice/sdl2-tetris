@@ -42,15 +42,15 @@ solution "sdl2-tetris"
 			libdirs { "../3rdparty/SDL2-2.0.3/lib/x86" }
 			libdirs { "../3rdparty/SDL2_ttf-2.0.12/lib/x86" }
 			postbuildcommands { 
-				"copy ..\\3rdparty\\SDL2-2.0.3\\lib\\x86\\*.dll ..\\bin",
-				"copy ..\\3rdparty\\SDL2_ttf-2.0.12\\lib\\x86\\*.dll ..\\bin" }
+				"copy ..\\3rdparty\\SDL2-2.0.3\\lib\\x86\\*.dll ..\\bin\\$(ConfigurationName)",
+				"copy ..\\3rdparty\\SDL2_ttf-2.0.12\\lib\\x86\\*.dll ..\\bin\\$(ConfigurationName)" }
 
 		configuration { "windows", "x64" }		
 			libdirs { "../3rdparty/SDL2-2.0.3/lib/x64" }
 			libdirs { "../3rdparty/SDL2_ttf-2.0.12/lib/x64" }
 			postbuildcommands { 
-				"copy ..\\3rdparty\\SDL2-2.0.3\\lib\\x64\\*.dll ..\\bin", 
-				"copy ..\\3rdparty\\SDL2_ttf-2.0.12\\lib\\x64\\*.dll ..\\bin" }
+				"copy ..\\3rdparty\\SDL2-2.0.3\\lib\\x64\\*.dll ..\\bin\\$(ConfigurationName)", 
+				"copy ..\\3rdparty\\SDL2_ttf-2.0.12\\lib\\x64\\*.dll ..\\bin\\$(ConfigurationName)" }
 
 		configuration "linux"
 			
