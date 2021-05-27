@@ -43,7 +43,7 @@ This project uses [GENie](https://github.com/bkaradzic/genie) to generate the bu
 	$ cd build
 	$ make
 
-n.b. You may need to chmod+x genie executable - I haven't figured out how to make the checked in file executable.
+n.b. You may need to 'chmod +x' genie executable - I haven't figured out how to make the checked in file executable.
 
 `make` with no confic specified defaults to the debug config for native architecture (usually 64-bit). Can call `make config=<xxx>` where `xxx` can be `debug`, `release`, `debug32`, `release32`, `debug64` or `release64`. 
 	
