@@ -10,8 +10,8 @@
 #include "Game.h"
 #include "Renderer.h"
 
-#include <SDL.h>
-#include <SDL_ttf.h>
+#include "SDL.h"
+#include "SDL_ttf.h"
 
 #ifdef __VCCOREVER__	// Raspberry Pi
 #include <GLES2/gl2.h>
@@ -193,7 +193,7 @@ void App::Run()
 	bool bDone = false;
 	while( !bDone )
 	{
-		GameInput gameInput = { 0 };
+		GameInput gameInput = {};
 
 		// respond to events
 		SDL_Event event;

@@ -6,7 +6,7 @@
 
 #include "App.h"
 
-#include <SDL.h>
+#include "SDL.h"
 
 #include <stdio.h>
 #include <stdlib.h>

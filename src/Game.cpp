@@ -15,7 +15,7 @@
 
 static const unsigned int s_kFieldWidth = 10;
 static const unsigned int s_kFieldHeight = 20;
-static const unsigned int s_kNumHiddenRows = 2;		// TODO: Use this region to spawn tetrominoes out of sight (centred)
+//static const unsigned int s_kNumHiddenRows = 2;		// TODO: Use this region to spawn tetrominoes out of sight (centred)
 static const unsigned int s_initialFramesPerFallStep = 48;
 static const int s_deltaFramesPerFallStepPerLevel = 2;
 
@@ -188,6 +188,8 @@ void Game::Update( const GameInput& gameInput, float deltaTimeSeconds )
 			m_gameState = kGameState_TitleScreen;
 		}
 		break;
+    default:
+        HP_FATAL_ERROR("Unhandled case");
 	}
 }
 
@@ -458,6 +460,8 @@ void Game::Draw( Renderer& renderer )
 		DrawPlaying( renderer );
 		renderer.DrawText( "GAME OVER", renderer.GetLogicalWidth() / 2 - 100, renderer.GetLogicalHeight() / 2, 0xffffffff );
 		break;
+    default:
+        HP_FATAL_ERROR("Unhandled case");
 	}
 
 	//#ifdef _DEBUG

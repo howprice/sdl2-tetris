@@ -8,9 +8,9 @@
 
 #include "Debug.h"
 
-#include <stdio.h>
+#include "SDL.h"
 
-#include <SDL.h>
+#include <stdio.h>
 
 //--------------------------------------------------------------------------------------------------
 // Helpers
